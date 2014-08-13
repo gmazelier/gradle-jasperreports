@@ -5,17 +5,18 @@ import org.gradle.api.Project
 
 class JasperReportsPlugin implements Plugin<Project> {
 
+	def extension
+
 	@Override
 	void apply(Project project) {
 		project.extensions.create("jasperreports", JasperReportsExtension, project)
+		extension = project.jasperreports
 
 		project.task('prepareReportsCompilation') << {
-			def jasperreports = project.jasperreports
-
 			def Map<File,String> directoryErrors = [
-					(jasperreports.srcDir): false,
-					(jasperreports.tmpDir): true,
-					(jasperreports.outDir): true,
+					(extension.srcDir): false,
+					(extension.tmpDir): true,
+					(extension.outDir): true,
 			].collect { directory, isOutputDirectory ->
 				checkDirectory directory, isOutputDirectory
 			}.collectEntries().findAll { it.value }
@@ -26,6 +27,8 @@ class JasperReportsPlugin implements Plugin<Project> {
 				}.join ', '
 				throw new IllegalArgumentException(message)
 			}
+
+			displayConfiguration()
 		}
 	}
 
@@ -40,6 +43,20 @@ class JasperReportsPlugin implements Plugin<Project> {
 		if (isOutputDirectory && !directory.canWrite())
 			return [directory, "${directory} is not writeable!"]
 		[directory, null]
+	}
+
+	void displayConfiguration() {
+		if (!extension.verbose) return
+
+		println ">>> JasperReports Plugin Configuration"
+		println "Source directory: ${extension.srcDir}"
+		println "Temporary directory: ${extension.tmpDir}"
+		println "Output directory: ${extension.outDir}"
+		println "Source files extension: ${extension.srcExt}"
+		println "Compiled files extension: ${extension.outExt}"
+		println "Compiler: ${extension.compiler}"
+		println "Keep Java files: ${extension.keepJava}"
+		println "Validate XML before compiling: ${extension.validateXml}"
 	}
 
 }
