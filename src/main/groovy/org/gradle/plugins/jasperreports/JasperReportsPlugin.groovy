@@ -2,6 +2,7 @@ package org.gradle.plugins.jasperreports
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.logging.Logger
 
 class JasperReportsPlugin implements Plugin<Project> {
 
@@ -28,7 +29,7 @@ class JasperReportsPlugin implements Plugin<Project> {
 				throw new IllegalArgumentException(message)
 			}
 
-			displayConfiguration()
+			displayConfiguration project.getLogger()
 		}
 	}
 
@@ -45,18 +46,20 @@ class JasperReportsPlugin implements Plugin<Project> {
 		[directory, null]
 	}
 
-	void displayConfiguration() {
+	void displayConfiguration(Logger log) {
 		if (!extension.verbose) return
 
-		println ">>> JasperReports Plugin Configuration"
-		println "Source directory: ${extension.srcDir}"
-		println "Temporary directory: ${extension.tmpDir}"
-		println "Output directory: ${extension.outDir}"
-		println "Source files extension: ${extension.srcExt}"
-		println "Compiled files extension: ${extension.outExt}"
-		println "Compiler: ${extension.compiler}"
-		println "Keep Java files: ${extension.keepJava}"
-		println "Validate XML before compiling: ${extension.validateXml}"
+		log.with {
+			lifecycle ">>> JasperReports Plugin Configuration"
+			lifecycle "Source directory: ${extension.srcDir}"
+			lifecycle "Temporary directory: ${extension.tmpDir}"
+			lifecycle "Output directory: ${extension.outDir}"
+			lifecycle "Source files extension: ${extension.srcExt}"
+			lifecycle "Compiled files extension: ${extension.outExt}"
+			lifecycle "Compiler: ${extension.compiler}"
+			lifecycle "Keep Java files: ${extension.keepJava}"
+			lifecycle "Validate XML before compiling: ${extension.validateXml}"
+		}
 	}
 
 }
