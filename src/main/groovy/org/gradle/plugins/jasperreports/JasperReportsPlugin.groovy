@@ -10,10 +10,12 @@ class JasperReportsPlugin implements Plugin<Project> {
 		project.extensions.create("jasperreports", JasperReportsExtension, project)
 
 		project.task('prepareReportsCompilation') << {
+			def jasperreports = project.jasperreports
+
 			def Map<File,String> directoryErrors = [
-					(project.jasperreports.srcDir): false,
-					(project.jasperreports.tmpDir): true,
-					(project.jasperreports.outDir): true,
+					(jasperreports.srcDir): false,
+					(jasperreports.tmpDir): true,
+					(jasperreports.outDir): true,
 			].collect { directory, isOutputDirectory ->
 				checkDirectory directory, isOutputDirectory
 			}.collectEntries().findAll { it.value }
