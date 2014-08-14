@@ -4,7 +4,15 @@ version = '0.1-SNAPSHOT'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
+repositories {
+	mavenCentral()
+	maven {
+		url 'http://jasperreports.sourceforge.net/maven2'
+	}
+}
+
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
+	compile 'net.sf.jasperreports:jasperreports:5.2.0'
 }
