@@ -16,6 +16,11 @@ class JasperReportsPreCompile extends DefaultTask {
 
 	@TaskAction
 	void prepareCompilation() {
+		checkDirectories()
+		displayConfiguration()
+	}
+
+	void checkDirectories() {
 		def Map<File,String> directoryErrors = [
 				(srcDir): false,
 				(tmpDir): true,
@@ -30,8 +35,6 @@ class JasperReportsPreCompile extends DefaultTask {
 			}.join ', '
 			throw new IllegalArgumentException(message)
 		}
-
-		displayConfiguration()
 	}
 
 	def checkDirectory = { directory, isOutputDirectory ->
