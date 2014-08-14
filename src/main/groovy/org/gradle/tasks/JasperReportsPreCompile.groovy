@@ -15,7 +15,7 @@ class JasperReportsPreCompile extends DefaultTask {
 	def boolean verbose
 
 	@TaskAction
-	void checkConfiguration() {
+	void prepareCompilation() {
 		def Map<File,String> directoryErrors = [
 				(srcDir): false,
 				(tmpDir): true,
