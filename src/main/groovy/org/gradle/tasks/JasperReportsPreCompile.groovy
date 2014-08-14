@@ -1,4 +1,10 @@
 package org.gradle.tasks
+
+import static net.sf.jasperreports.engine.design.JRCompiler.*
+import static net.sf.jasperreports.engine.xml.JRReportSaxParserFactory.COMPILER_XML_VALIDATION
+
+import net.sf.jasperreports.engine.DefaultJasperReportsContext
+import net.sf.jasperreports.engine.JasperReportsContext
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
@@ -17,6 +23,7 @@ class JasperReportsPreCompile extends DefaultTask {
 	@TaskAction
 	void prepareCompilation() {
 		checkDirectories()
+		configureJasperReportsContext()
 		displayConfiguration()
 	}
 
@@ -35,6 +42,14 @@ class JasperReportsPreCompile extends DefaultTask {
 			}.join ', '
 			throw new IllegalArgumentException(message)
 		}
+	}
+
+	void configureJasperReportsContext() {
+		JasperReportsContext context = DefaultJasperReportsContext.getInstance()
+		context.setProperty COMPILER_XML_VALIDATION, String.valueOf(validateXml)
+		context.setProperty COMPILER_PREFIX, compiler
+		context.setProperty COMPILER_KEEP_JAVA_FILE, String.valueOf(keepJava)
+		context.setProperty COMPILER_TEMP_DIR, tmpDir.canonicalPath
 	}
 
 	def checkDirectory = { directory, isOutputDirectory ->
