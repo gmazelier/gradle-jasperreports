@@ -9,10 +9,14 @@ repositories {
 	maven {
 		url 'http://jasperreports.sourceforge.net/maven2'
 	}
+	maven {
+		url 'http://repository.jboss.org/maven2/'
+	}
 }
 
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
 	compile 'net.sf.jasperreports:jasperreports:5.2.0'
+	compile 'org.codehaus.gpars:gpars:1.2.1'
 }
