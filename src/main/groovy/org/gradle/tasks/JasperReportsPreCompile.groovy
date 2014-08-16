@@ -73,14 +73,15 @@ class JasperReportsPreCompile extends DefaultTask {
 
 		getLogger().with {
 			lifecycle ">>> JasperReports Plugin Configuration"
-			lifecycle "Source directory: ${srcDir}"
-			lifecycle "Temporary directory: ${tmpDir}"
-			lifecycle "Output directory: ${outDir}"
+			lifecycle "Source directory: ${srcDir.canonicalPath}"
+			lifecycle "Temporary directory: ${tmpDir.canonicalPath}"
+			lifecycle "Output directory: ${outDir.canonicalPath}"
 			lifecycle "Source files extension: ${srcExt}"
 			lifecycle "Compiled files extension: ${outExt}"
 			lifecycle "Compiler: ${compiler}"
 			lifecycle "Keep Java files: ${keepJava}"
 			lifecycle "Validate XML before compiling: ${validateXml}"
+			lifecycle "<<<"
 		}
 	}
 
