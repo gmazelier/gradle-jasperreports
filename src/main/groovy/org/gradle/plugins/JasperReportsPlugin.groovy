@@ -1,6 +1,7 @@
 package org.gradle.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.tasks.JasperReportsCompile
 import org.gradle.tasks.JasperReportsPreCompile
 
 class JasperReportsPlugin implements Plugin<Project> {
@@ -15,6 +16,12 @@ class JasperReportsPlugin implements Plugin<Project> {
 				type: JasperReportsPreCompile
 		) as JasperReportsPreCompile
 
+		def compileTask = project.task(
+				'compileAllReports',
+				dependsOn: 'prepareReportsCompilation',
+				type: JasperReportsCompile
+		) as JasperReportsCompile
+
 		project.afterEvaluate {
 			// Precompile task
 			preCompileTask.srcDir = extension.srcDir
@@ -26,6 +33,12 @@ class JasperReportsPlugin implements Plugin<Project> {
 			preCompileTask.keepJava = extension.keepJava
 			preCompileTask.validateXml = extension.validateXml
 			preCompileTask.verbose = extension.verbose
+			// Compile task
+			compileTask.srcDir = project.jasperreports.srcDir
+			compileTask.outDir = project.jasperreports.outDir
+			compileTask.srcExt = project.jasperreports.srcExt
+			compileTask.outExt = project.jasperreports.outExt
+			compileTask.verbose = project.jasperreports.verbose
 		}
 	}
 
