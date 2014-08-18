@@ -28,7 +28,7 @@ class JasperReportsCompile extends DefaultTask {
 		}
 		inputs.removed { change ->
 			if (verbose) log.lifecycle "Removed file ${change.file.name}"
-			def fileToRemove = new File(outDir, change.file.name.replaceAll(srcExt, outExt))
+			def fileToRemove = outputFile(change.file)
 			fileToRemove.delete()
 		}
 
@@ -37,7 +37,7 @@ class JasperReportsCompile extends DefaultTask {
 			results = reportsToCompile.collectParallel { change ->
 				if (verbose) log.lifecycle "Compiling file ${change.file.name}"
 				def File src = change.file
-				def File out = new File(outDir, change.file.name.replaceAll(srcExt, outExt) as String)
+				def File out = outputFile(src)
 				try {
 					JasperCompileManager.compileReportToFile(src.absolutePath, out.absolutePath);
 				} catch (any) {
@@ -47,6 +47,10 @@ class JasperReportsCompile extends DefaultTask {
 				[name: src.name, success: true]
 			}
 		}
+	}
+
+	def File outputFile(File src) {
+		new File(outDir, src.name.replaceAll(srcExt, outExt))
 	}
 
 }
