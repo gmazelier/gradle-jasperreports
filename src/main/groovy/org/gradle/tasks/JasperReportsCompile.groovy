@@ -2,6 +2,7 @@ package org.gradle.tasks
 
 import static groovyx.gpars.GParsPool.withPool
 
+import net.sf.jasperreports.engine.JasperCompileManager
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
@@ -35,11 +36,15 @@ class JasperReportsCompile extends DefaultTask {
 		withPool {
 			results = reportsToCompile.collectParallel { change ->
 				if (verbose) log.lifecycle "Compiling file ${change.file.name}"
-				// TODO Design compilation
-				def fileToCreate = new File(outDir, change.file.name.replaceAll(srcExt, outExt))
-				fileToCreate.text = "compiled"
-				// END
-				[name: change.file.name, success: true]
+				def File src = change.file
+				def File out = new File(outDir, change.file.name.replaceAll(srcExt, outExt) as String)
+				try {
+					JasperCompileManager.compileReportToFile(src.absolutePath, out.absolutePath);
+				} catch (any) {
+					log.lifecycle "An error occured: ${any.message}", any
+					return [name: src.name, success: false]
+				}
+				[name: src.name, success: true]
 			}
 		}
 	}
