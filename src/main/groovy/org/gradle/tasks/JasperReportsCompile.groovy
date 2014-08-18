@@ -32,6 +32,8 @@ class JasperReportsCompile extends DefaultTask {
 			fileToRemove.delete()
 		}
 
+		def start = System.currentTimeMillis()
+
 		def results = []
 		withPool {
 			results = reportsToCompile.collectParallel { change ->
@@ -47,6 +49,9 @@ class JasperReportsCompile extends DefaultTask {
 				[name: src.name, success: true]
 			}
 		}
+
+		def stop = System.currentTimeMillis()
+		logger.lifecycle "${results.size()} designs compiled in ${stop - start} ms"
 	}
 
 	def File outputFile(File src) {
