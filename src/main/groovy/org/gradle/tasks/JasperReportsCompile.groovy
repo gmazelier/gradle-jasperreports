@@ -4,6 +4,7 @@ import static groovyx.gpars.GParsPool.withPool
 
 import net.sf.jasperreports.engine.JasperCompileManager
 import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.OutputDirectory
@@ -51,6 +52,10 @@ class JasperReportsCompile extends DefaultTask {
 		}
 
 		def stop = System.currentTimeMillis()
+
+		def failures = results.findAll { !it['success'] }
+		if (failures) throw new GradleException("Could not compile ${failures.size()} designs")
+
 		logger.lifecycle "${results.size()} designs compiled in ${stop - start} ms"
 	}
 
