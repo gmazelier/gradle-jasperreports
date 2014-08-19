@@ -6,6 +6,8 @@ import static net.sf.jasperreports.engine.xml.JRReportSaxParserFactory.COMPILER_
 import net.sf.jasperreports.engine.DefaultJasperReportsContext
 import net.sf.jasperreports.engine.JasperReportsContext
 import org.gradle.api.DefaultTask
+import org.gradle.api.InvalidUserDataException
+import org.gradle.api.ProjectConfigurationException
 import org.gradle.api.tasks.TaskAction
 
 class JasperReportsPreCompile extends DefaultTask {
@@ -40,7 +42,7 @@ class JasperReportsPreCompile extends DefaultTask {
 			def message = directoryErrors.collect { directory, errorMessage ->
 				"${directory?.canonicalPath}: $errorMessage"
 			}.join ', '
-			throw new IllegalArgumentException(message)
+			throw new InvalidUserDataException(message)
 		}
 	}
 
