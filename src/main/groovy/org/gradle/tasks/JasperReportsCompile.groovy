@@ -46,7 +46,7 @@ class JasperReportsCompile extends DefaultTask {
 					JasperCompileManager.compileReportToFile(src.absolutePath, out.absolutePath);
 				} catch (any) {
 					log.lifecycle "An error occured: ${any.message}", any
-					return [name: src.name, success: false]
+					return [name: src.name, success: false, exception: any]
 				}
 				[name: src.name, success: true]
 			}
