@@ -20,6 +20,7 @@ class JasperReportsPlugin implements Plugin<Project> {
 		def compileTask = project.task(
 				'compileAllReports',
 				description: 'Compile JasperReports design source files.',
+				group: 'jasperReports',
 				dependsOn: 'prepareReportsCompilation',
 				type: JasperReportsCompile
 		) as JasperReportsCompile
