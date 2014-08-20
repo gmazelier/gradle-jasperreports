@@ -23,10 +23,10 @@ class JasperReportsCompile extends DefaultTask {
 	void execute(IncrementalTaskInputs inputs) {
 		def log = getLogger()
 
-		def reportsToCompile = []
+		def compilationTasks = []
 		inputs.outOfDate { change ->
 			if (change.file.name.endsWith(srcExt))
-				reportsToCompile << change
+				compilationTasks << [src: change.file, out: outputFile(change.file)]
 		}
 		inputs.removed { change ->
 			if (verbose) log.lifecycle "Removed file ${change.file.name}"
@@ -38,10 +38,10 @@ class JasperReportsCompile extends DefaultTask {
 
 		def results = []
 		withPool {
-			results = reportsToCompile.collectParallel { change ->
-				if (verbose) log.lifecycle "Compiling file ${change.file.name}"
-				def File src = change.file
-				def File out = outputFile(src)
+			results = compilationTasks.collectParallel { task ->
+				def File src = task['src'] as File
+				def File out = task['out'] as File
+				if (verbose) log.lifecycle "Compiling file ${src.name}"
 				try {
 					JasperCompileManager.compileReportToFile src.absolutePath, out.absolutePath
 				} catch (any) {
