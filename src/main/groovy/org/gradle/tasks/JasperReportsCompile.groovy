@@ -25,7 +25,8 @@ class JasperReportsCompile extends DefaultTask {
 
 		def reportsToCompile = []
 		inputs.outOfDate { change ->
-			reportsToCompile << change
+			if (change.file.name.endsWith(srcExt))
+				reportsToCompile << change
 		}
 		inputs.removed { change ->
 			if (verbose) log.lifecycle "Removed file ${change.file.name}"
