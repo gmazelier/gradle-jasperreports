@@ -13,11 +13,13 @@ class JasperReportsPlugin implements Plugin<Project> {
 
 		def preCompileTask = project.task(
 				'prepareReportsCompilation',
+				description: 'Configure JasperReports compiler and environment.',
 				type: JasperReportsPreCompile
 		) as JasperReportsPreCompile
 
 		def compileTask = project.task(
 				'compileAllReports',
+				description: 'Compile JasperReports design source files.',
 				dependsOn: 'prepareReportsCompilation',
 				type: JasperReportsCompile
 		) as JasperReportsCompile
