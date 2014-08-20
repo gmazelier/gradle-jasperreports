@@ -43,7 +43,7 @@ class JasperReportsCompile extends DefaultTask {
 				def File src = change.file
 				def File out = outputFile(src)
 				try {
-					JasperCompileManager.compileReportToFile(src.absolutePath, out.absolutePath);
+					JasperCompileManager.compileReportToFile src.absolutePath, out.absolutePath
 				} catch (any) {
 					return [name: src.name, success: false, exception: any]
 				}
@@ -63,7 +63,7 @@ class JasperReportsCompile extends DefaultTask {
 		new File(outDir, src.name.replaceAll(srcExt, outExt))
 	}
 
-	def String failureMessage(List failures) {
+	def failureMessage = { List failures ->
 		def stringBuilder = new StringBuilder()
 		stringBuilder.append "Could not compile ${failures.size()} designs:\n"
 		failures.each { failure ->
