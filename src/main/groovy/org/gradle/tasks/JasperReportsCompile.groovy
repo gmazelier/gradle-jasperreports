@@ -66,9 +66,9 @@ class JasperReportsCompile extends DefaultTask {
 
 	def String failureMessage(List failures) {
 		def stringBuilder = new StringBuilder()
-		stringBuilder.append("Could not compile ${failures.size()} designs:\n")
+		stringBuilder.append "Could not compile ${failures.size()} designs:\n"
 		failures.each { failure ->
-			stringBuilder.append("\t[${failure['name']}] ${failure['exception'].message}\n")
+			stringBuilder.append "\t[${failure['name']}] ${failure['exception'].message}\n"
 		}
 		stringBuilder.toString()
 	}
