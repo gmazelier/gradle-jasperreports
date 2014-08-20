@@ -55,13 +55,22 @@ class JasperReportsCompile extends DefaultTask {
 		def stop = System.currentTimeMillis()
 
 		def failures = results.findAll { !it['success'] }
-		if (failures) throw new GradleException("Could not compile ${failures.size()} designs")
+		if (failures) throw new GradleException(failureMessage(failures))
 
 		logger.lifecycle "${results.size()} designs compiled in ${stop - start} ms"
 	}
 
 	def File outputFile(File src) {
 		new File(outDir, src.name.replaceAll(srcExt, outExt))
+	}
+
+	def String failureMessage(List failures) {
+		def stringBuilder = new StringBuilder()
+		stringBuilder.append("Could not compile ${failures.size()} designs:\n")
+		failures.each { failure ->
+			stringBuilder.append("\t[${failure['name']}] ${failure['exception'].message}\n")
+		}
+		stringBuilder.toString()
 	}
 
 }
