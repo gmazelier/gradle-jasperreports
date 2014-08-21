@@ -20,3 +20,18 @@ dependencies {
 	compile 'net.sf.jasperreports:jasperreports:5.2.0'
 	compile 'org.codehaus.gpars:gpars:1.2.1'
 }
+
+task sourcesJar(type: Jar) {
+	classifier 'sources'
+	from sourceSets.main.allSource
+}
+
+task groovydocJar(type: Jar, dependsOn: groovydoc) {
+	classifier = 'groovydoc'
+	from groovydoc.destinationDir
+}
+
+artifacts {
+	archives sourcesJar
+	archives groovydocJar
+}
