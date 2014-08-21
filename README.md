@@ -2,11 +2,11 @@
 
 ## Description
 
+Provides the capability to compile JasperReports design files. This plugin is designed to work like the Maven plugins [Maven 2 JasperReports Plugin](http://mojo.codehaus.org/jasperreports-maven-plugin/) and [JasperReports-plugin](https://github.com/alexnederlof/Jasper-report-maven-plugin).
 
 ## Usage
 
 ### Installation
-
 
 ### Configuration
 
