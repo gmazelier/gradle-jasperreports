@@ -4,17 +4,19 @@
 
 ## Configuration
 
-| Parameter     | Type      | Default                                            | Description                             |
-|---------------|-----------|----------------------------------------------------|-----------------------------------------|
-| `srcDir`      | `File`    | `src/main/jasperreports`                           | Design source files directory.          |
-| `tmpDir`      | `File`    | `${project.buildDir}/jasperreports`                | Temporary files (`.java`) directory.    |
-| `outDir`      | `File`    | `${project.buildDir}/classes/main`                 | Compiled reports file directory.        |
-| `srcExt`      | `String`  | `'.jrxml'`                                         | Design source files extension.          |
-| `outExt`      | `String`  | `'.jasper'`                                        | Compiled reports files extension.       |
-| `compiler`    | `String`  | `net.sf.jasperreports.engine.design.JRJdtCompiler` | The report compiler to use.             |
-| `keepJava`    | `boolean` | `false`                                            | Keep temporary files after compiling.   |
-| `validateXml` | `boolean` | `true`                                             | Validate source files before compiling. |
-| `verbose`     | `boolean` | `false`                                            | Verbose plugin outpout.                 |
+Below are the parameters that can be used to configure the build:
+
+| Parameter     | Type      | Description                                                                                   |
+|---------------|-----------|-----------------------------------------------------------------------------------------------|
+| `srcDir`      | `File`    | Design source files directory. Default value: `src/main/jasperreports`                        |
+| `tmpDir`      | `File`    | Temporary files (`.java`) directory. Default value: `${project.buildDir}/jasperreports`       |
+| `outDir`      | `File`    | Compiled reports file directory. Default value: `${project.buildDir}/classes/main`            |
+| `srcExt`      | `String`  | Design source files extension. Default value: `'.jrxml'`                                      |
+| `outExt`      | `String`  | Compiled reports files extension. Default value: `'.jasper'`                                  |
+| `compiler`    | `String`  | The report compiler to use. Default value: `net.sf.jasperreports.engine.design.JRJdtCompiler` |
+| `keepJava`    | `boolean` | Keep temporary files after compiling. Default value: `false`                                  |
+| `validateXml` | `boolean` | Validate source files before compiling. Default value: `true`                                 |
+| `verbose`     | `boolean` | Verbose plugin outpout. Default value: `false`                                                |
 
 ## Example
 
