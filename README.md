@@ -2,7 +2,13 @@
 
 ## Description
 
-## Configuration
+
+## Usage
+
+### Installation
+
+
+### Configuration
 
 Below are the parameters that can be used to configure the build:
 
@@ -18,9 +24,13 @@ Below are the parameters that can be used to configure the build:
 | `validateXml` | `boolean` | Validate source files before compiling. Default value: `true`                                 |
 | `verbose`     | `boolean` | Verbose plugin outpout. Default value: `false`                                                |
 
-## Example
+### Example
 
-## Installation
+### Custom Build Process
+
+Adding a task dependency is very simple. For example, if you want to make sure that Groovy (and Java) compilation is successfully performed before JasperReports designs compilation, just add the following to your build script:
+
+    compileAllReports.dependsOn compileGroovy
 
 ## Getting Help
 
