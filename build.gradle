@@ -9,7 +9,6 @@ buildscript {
 }
 
 group = 'org.gradle.plugins'
-version = '0.1-SNAPSHOT'
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
