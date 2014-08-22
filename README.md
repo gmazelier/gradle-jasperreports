@@ -26,6 +26,20 @@ Below are the parameters that can be used to configure the build:
 
 ### Example
 
+Below is a complete example, with default values:
+
+    jasperreports {
+        srcDir = file('src/main/jasperreports')
+        tmpDir = file('${project.buildDir}/jasperreports')
+        outDir = file('${project.buildDir}/classes/main')
+        srcExt = '.jrxml'
+        outExt = '.jasper'
+        compiler = 'net.sf.jasperreports.engine.design.JRJdtCompiler'
+        keepJava = false
+        validateXml = true
+        verbose = false
+    }
+
 ### Custom Build Process
 
 Adding a task dependency is very simple. For example, if you want to make sure that Groovy (and Java) compilation is successfully performed before JasperReports designs compilation, just add the following to your build script:
