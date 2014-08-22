@@ -1,8 +1,19 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven { url "https://oss.sonatype.org/content/groups/public"}
+	}
+	dependencies {
+		classpath 'com.github.townsfolk:gradle-release:1.2'
+	}
+}
+
 group = 'org.gradle.plugins'
 version = '0.1-SNAPSHOT'
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'release'
 
 repositories {
 	mavenCentral()
@@ -35,3 +46,4 @@ artifacts {
 	archives sourcesJar
 	archives groovydocJar
 }
+
