@@ -33,6 +33,11 @@ dependencies {
 	compile 'org.codehaus.gpars:gpars:1.2.1'
 }
 
+compileGroovy {
+	sourceCompatibility = '1.6'
+	targetCompatibility = '1.6'
+}
+
 task sourcesJar(type: Jar) {
 	classifier 'sources'
 	from sourceSets.main.allSource
