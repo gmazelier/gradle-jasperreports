@@ -2,11 +2,30 @@
 
 ## Description
 
-Provides the capability to compile JasperReports design files. This plugin is designed to work like the Maven plugins [Maven 2 JasperReports Plugin](http://mojo.codehaus.org/jasperreports-maven-plugin/) and [JasperReports-plugin](https://github.com/alexnederlof/Jasper-report-maven-plugin).
+Provides the capability to compile JasperReports design files. This plugin is designed to work like the Maven plugins [Maven 2 JasperReports Plugin](http://mojo.codehaus.org/jasperreports-maven-plugin) and [JasperReports-plugin](https://github.com/alexnederlof/Jasper-report-maven-plugin). Much of this was inspired by these two projects.
 
 ## Usage
 
 ### Installation
+
+To use in Gradle 2.1 and later...
+
+    plugins {
+        id 'com.github.gmazelier.jasperreports' version '0.1.0'
+    }
+
+To use in earlier versions...
+
+    buildscript {
+        repositories {
+            jcenter()
+        }
+        dependencies {
+            classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.1.0'
+        }
+    }
+
+    apply plugin: 'com.github.gmazelier.jasperreports'
 
 ### Configuration
 
