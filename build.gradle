@@ -1,18 +1,20 @@
+group = 'com.github.gmazelier'
+
 buildscript {
 	repositories {
+		jcenter()
 		mavenCentral()
 		maven { url "https://oss.sonatype.org/content/groups/public"}
 	}
 	dependencies {
 		classpath 'com.github.townsfolk:gradle-release:1.2'
+		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5'
 	}
 }
 
-group = 'org.gradle.plugins'
-
 apply plugin: 'groovy'
-apply plugin: 'maven'
-apply plugin: 'release'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
 repositories {
 	mavenCentral()
@@ -46,3 +48,41 @@ artifacts {
 	archives groovydocJar
 }
 
+publishing {
+	publications {
+		mavenGroovy(MavenPublication) {
+			from components.java
+			artifact sourcesJar
+			artifact groovydocJar
+		}
+	}
+}
+
+if (!hasProperty('bintrayUser')) ext.bintrayUser = ''
+if (!hasProperty('bintrayKey')) ext.bintrayKey = ''
+
+bintray {
+	user = bintrayUser // passed from command line
+	key = bintrayKey // passed from command line
+	publications = ['mavenGroovy']
+	dryRun = false
+	publish = false
+	pkg {
+		repo = 'maven'
+		name = "${project.group}:${rootProject.name}"
+		desc = 'Provides the capability to compile JasperReports design files.'
+		websiteUrl = 'https://github.com/gmazelier/gradle-jasperreports'
+		issueTrackerUrl = 'https://github.com/gmazelier/gradle-jasperreports/issues'
+		vcsUrl = 'https://github.com/gmazelier/gradle-jasperreports.git'
+		licenses = ['Apache-2.0']
+		labels = ['gradle', 'jasperreports']
+		version {
+			vcsTag = project.version
+			attributes = ['gradle-plugin': "${project.group}.jasperreports:${project.group}:${rootProject.name}"]
+		}
+	}
+}
+
+// Apply release plugin after 'publishing' extension configuration to avoid the following error:
+// Cannot configure the 'publishing' extension after it has been accessed.
+apply plugin: 'release'
