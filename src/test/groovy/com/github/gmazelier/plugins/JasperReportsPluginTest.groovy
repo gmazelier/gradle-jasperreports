@@ -1,42 +1,43 @@
-package org.gradle.plugins
+package com.github.gmazelier.plugins
+
+import com.github.gmazelier.tasks.JasperReportsCompile
+import com.github.gmazelier.tasks.JasperReportsPreCompile
 import org.gradle.api.Project
-import org.gradle.tasks.JasperReportsCompile
-import org.gradle.tasks.JasperReportsPreCompile
 import org.gradle.testfixtures.ProjectBuilder
 
 class JasperReportsPluginTest extends GroovyTestCase {
 
 	public void testPluginAddsJasperReportsPreCompileTask() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'jasperreports'
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		assert project.tasks.prepareReportsCompilation instanceof JasperReportsPreCompile
 	}
 
 	public void testPluginAddsJasperReportsCompileTask() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'jasperreports'
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		assert project.tasks.compileAllReports instanceof JasperReportsCompile
 	}
 
 	public void testCompileAllReportsDependsOnPrepareReportsCompilation() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'jasperreports'
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		assert project.tasks.compileAllReports.dependsOn(project.tasks.prepareReportsCompilation)
 	}
 
 	public void testPluginAddsJasperReportsExtension() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'jasperreports'
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		assert project.jasperreports instanceof JasperReportsExtension
 	}
 
 	public void testPluginHasDefaultValues() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'jasperreports'
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		def jasperreports = project.jasperreports as JasperReportsExtension
 		assert jasperreports.srcDir == new File('src/main/jasperreports')

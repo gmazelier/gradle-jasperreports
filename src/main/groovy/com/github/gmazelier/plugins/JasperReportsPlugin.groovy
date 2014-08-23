@@ -1,8 +1,9 @@
-package org.gradle.plugins
+package com.github.gmazelier.plugins
+
+import com.github.gmazelier.tasks.JasperReportsCompile
+import com.github.gmazelier.tasks.JasperReportsPreCompile
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.tasks.JasperReportsCompile
-import org.gradle.tasks.JasperReportsPreCompile
 
 class JasperReportsPlugin implements Plugin<Project> {
 

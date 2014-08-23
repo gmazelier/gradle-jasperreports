@@ -1,5 +1,4 @@
-package org.gradle.tasks
-
+package com.github.gmazelier.tasks
 import static net.sf.jasperreports.engine.design.JRCompiler.*
 import static net.sf.jasperreports.engine.xml.JRReportSaxParserFactory.COMPILER_XML_VALIDATION
 
@@ -7,7 +6,6 @@ import net.sf.jasperreports.engine.DefaultJasperReportsContext
 import net.sf.jasperreports.engine.JasperReportsContext
 import org.gradle.api.DefaultTask
 import org.gradle.api.InvalidUserDataException
-import org.gradle.api.ProjectConfigurationException
 import org.gradle.api.tasks.TaskAction
 
 class JasperReportsPreCompile extends DefaultTask {

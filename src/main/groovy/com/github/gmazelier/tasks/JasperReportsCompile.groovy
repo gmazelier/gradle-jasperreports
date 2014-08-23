@@ -1,4 +1,4 @@
-package org.gradle.tasks
+package com.github.gmazelier.tasks
 
 import static groovyx.gpars.GParsPool.withPool
 

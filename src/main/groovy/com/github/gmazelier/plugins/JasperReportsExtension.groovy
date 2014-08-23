@@ -1,4 +1,4 @@
-package org.gradle.plugins
+package com.github.gmazelier.plugins
 import org.gradle.api.Project
 
 class JasperReportsExtension {
