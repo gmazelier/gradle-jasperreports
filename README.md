@@ -6,6 +6,25 @@ Provides the capability to compile JasperReports design files. This plugin is de
 
 ## Usage
 
+This plugin provides one main task, `compileAllReports`. It uses [incremental task](http://www.gradle.org/docs/current/dsl/org.gradle.api.tasks.incremental.IncrementalTaskInputs.html) feature to process out-of-date files and [parallel collections](http://gpars.codehaus.org/GParsPool) from [GPars](http://gpars.codehaus.org) for parallel processing. Adapt your build process to your own needs by defining the proper tasks depedencies (see *Custom Build Process* below).
+
+If your designs compilation needs to run after Groovy compilation, running `compileAllReports` should give a similar output:
+
+    $ gradle compileAllReports
+    :compileJava UP-TO-DATE
+    :compileGroovy UP-TO-DATE
+    :prepareReportsCompilation
+    :compileAllReports
+    21 designs compiled in 2222 ms
+    
+    BUILD SUCCESSFUL
+    
+    Total time: 6.577 secs
+
+To clean up and start fresh, simply run:
+
+    $ gradle clean compileAllReports
+
 ### Installation
 
 To use in Gradle 2.1 and later...
