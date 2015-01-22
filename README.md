@@ -40,6 +40,12 @@ To use in earlier versions...
     buildscript {
         repositories {
             jcenter()
+            maven {
+                url 'http://jasperreports.sourceforge.net/maven2'
+            }
+            maven {
+                url 'http://repository.jboss.org/maven2/'
+            }
         }
         dependencies {
             classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.1.0'
