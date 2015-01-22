@@ -38,6 +38,7 @@ class JasperReportsPlugin implements Plugin<Project> {
 			preCompileTask.validateXml = extension.validateXml
 			preCompileTask.verbose = extension.verbose
 			// Compile task
+			compileTask.classpath = project.jasperreports.classpath
 			compileTask.srcDir = project.jasperreports.srcDir
 			compileTask.outDir = project.jasperreports.outDir
 			compileTask.srcExt = project.jasperreports.srcExt
