@@ -3,15 +3,16 @@ import org.gradle.api.Project
 
 class JasperReportsExtension {
 
-	def File srcDir = new File('src/main/jasperreports')
-	def File tmpDir = new File("${project.buildDir }/jasperreports")
-	def File outDir = new File("${project.buildDir }/classes/main")
-	def String srcExt = '.jrxml'
-	def String outExt = '.jasper'
-	def String compiler = 'net.sf.jasperreports.engine.design.JRJdtCompiler'
-	def boolean keepJava = false
-	def boolean validateXml = true
-	def boolean verbose = false
+  Iterable<File> classpath = project.sourceSets.main.runtimeClasspath
+	File srcDir = new File('src/main/jasperreports')
+	File tmpDir = new File("${project.buildDir }/jasperreports")
+	File outDir = new File("${project.buildDir }/classes/main")
+	String srcExt = '.jrxml'
+	String outExt = '.jasper'
+	String compiler = 'net.sf.jasperreports.engine.design.JRJdtCompiler'
+	boolean keepJava = false
+	boolean validateXml = true
+	boolean verbose = false
 
 	private Project project
 
