@@ -7,12 +7,14 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
 
 class JasperReportsCompile extends DefaultTask {
 
+	@InputFiles Iterable<File> classpath
 	@InputDirectory def File srcDir
 	@OutputDirectory def File outDir
 	@Input def String srcExt
@@ -23,10 +25,15 @@ class JasperReportsCompile extends DefaultTask {
 	void execute(IncrementalTaskInputs inputs) {
 		def log = getLogger()
 
+		def dependencies = classpath.collect { dependency ->
+			dependency?.toURI()?.toURL()
+		}
+    if (verbose) log.lifecycle "Additional classpath: ${dependencies}"
+
 		def compilationTasks = []
 		inputs.outOfDate { change ->
 			if (change.file.name.endsWith(srcExt))
-				compilationTasks << [src: change.file, out: outputFile(change.file)]
+				compilationTasks << [src: change.file, out: outputFile(change.file), deps: dependencies]
 		}
 		inputs.removed { change ->
 			if (verbose) log.lifecycle "Removed file ${change.file.name}"
@@ -39,11 +46,21 @@ class JasperReportsCompile extends DefaultTask {
 		def results = []
 		withPool {
 			results = compilationTasks.collectParallel { task ->
-				def File src = task['src'] as File
-				def File out = task['out'] as File
+				def src = task['src'] as File
+				def out = task['out'] as File
+				def deps = task['deps']
+
 				if (verbose) log.lifecycle "Compiling file ${src.name}"
+				
 				try {
+					// Configure class loader with addtional dependencies
+					ClassLoader originalLoader = Thread.currentThread().getContextClassLoader()
+					URLClassLoader loader = new URLClassLoader(deps as URL[], originalLoader)
+					Thread.currentThread().setContextClassLoader loader
+					// Compile report
 					JasperCompileManager.compileReportToFile src.absolutePath, out.absolutePath
+					// Restore class loader
+					Thread.currentThread().setContextClassLoader originalLoader
 				} catch (any) {
 					return [name: src.name, success: false, exception: any]
 				}
@@ -56,7 +73,7 @@ class JasperReportsCompile extends DefaultTask {
 		def failures = results.findAll { !it['success'] }
 		if (failures) throw new GradleException(failureMessage(failures))
 
-		logger.lifecycle "${results.size()} designs compiled in ${stop - start} ms"
+		log.lifecycle "${results.size()} designs compiled in ${stop - start} ms"
 	}
 
 	def File outputFile(File src) {
