@@ -3,7 +3,7 @@ import org.gradle.api.Project
 
 class JasperReportsExtension {
 
-  Iterable<File> classpath = project.sourceSets.main.runtimeClasspath
+  Iterable<File> classpath = []
 	File srcDir = new File('src/main/jasperreports')
 	File tmpDir = new File("${project.buildDir }/jasperreports")
 	File outDir = new File("${project.buildDir }/classes/main")

@@ -58,18 +58,18 @@ To use in earlier versions...
 
 Below are the parameters that can be used to configure the build:
 
-| Parameter     | Type             | Description                                                                                                    |
-|---------------|------------------|----------------------------------------------------------------------------------------------------------------|
-| `srcDir`      | `File`           | Design source files directory. Default value: `src/main/jasperreports`                                         |
-| `tmpDir`      | `File`           | Temporary files (`.java`) directory. Default value: `${project.buildDir}/jasperreports`                        |
-| `outDir`      | `File`           | Compiled reports file directory. Default value: `${project.buildDir}/classes/main`                             |
-| `srcExt`      | `String`         | Design source files extension. Default value: `'.jrxml'`                                                       |
-| `outExt`      | `String`         | Compiled reports files extension. Default value: `'.jasper'`                                                   |
-| `compiler`    | `String`         | The report compiler to use. Default value: `net.sf.jasperreports.engine.design.JRJdtCompiler`                  |
-| `keepJava`    | `boolean`        | Keep temporary files after compiling. Default value: `false`                                                   |
-| `validateXml` | `boolean`        | Validate source files before compiling. Default value: `true`                                                  |
-| `verbose`     | `boolean`        | Verbose plugin outpout. Default value: `false`                                                                 |
-| `classpath`   | `Iterable<File>` | Extra elements to add to the classpath when compile. Default value: `project.sourceSets.main.runtimeClasspath` |
+| Parameter     | Type             | Description                                                                                   |
+|---------------|------------------|-----------------------------------------------------------------------------------------------|
+| `srcDir`      | `File`           | Design source files directory. Default value: `src/main/jasperreports`                        |
+| `tmpDir`      | `File`           | Temporary files (`.java`) directory. Default value: `${project.buildDir}/jasperreports`       |
+| `outDir`      | `File`           | Compiled reports file directory. Default value: `${project.buildDir}/classes/main`            |
+| `srcExt`      | `String`         | Design source files extension. Default value: `'.jrxml'`                                      |
+| `outExt`      | `String`         | Compiled reports files extension. Default value: `'.jasper'`                                  |
+| `compiler`    | `String`         | The report compiler to use. Default value: `net.sf.jasperreports.engine.design.JRJdtCompiler` |
+| `keepJava`    | `boolean`        | Keep temporary files after compiling. Default value: `false`                                  |
+| `validateXml` | `boolean`        | Validate source files before compiling. Default value: `true`                                 |
+| `verbose`     | `boolean`        | Verbose plugin outpout. Default value: `false`                                                |
+| `classpath`   | `Iterable<File>` | Extra elements to add to the classpath when compile. Default value: `[]`                      |
 
 ### Example
 
@@ -85,7 +85,7 @@ Below is a complete example, with default values:
         keepJava = false
         validateXml = true
         verbose = false
-        classpath = project.sourceSets.main.runtimeClasspath
+        classpath = []
     }
 
 ### Custom Build Process
