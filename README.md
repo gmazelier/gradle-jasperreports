@@ -94,6 +94,63 @@ Adding a task dependency is very simple. For example, if you want to make sure t
 
     compileAllReports.dependsOn compileGroovy
 
+### Custom Classpath
+
+#### Sharing dependencies
+
+Here's a way to share dependencies (`joda-time` in this example) between the main project and the designs compilation:
+
+    buildscript {
+      ext {
+        libs = [
+          jrdeps: [
+            // all dependencies shared with JasperReports
+            'joda-time:joda-time:2.7'
+          ]
+        ]
+      }
+      repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+          url 'http://jasperreports.sourceforge.net/maven2'
+        }
+        maven {
+          url 'http://repository.jboss.org/maven2/'
+        }
+      }
+      dependencies {
+        classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.1.0'
+        classpath libs.jrdeps
+      }
+    }
+
+    apply plugin: 'groovy'
+    apply plugin: 'com.github.gmazelier.jasperreports'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+      compile libs.jrdeps
+    }
+
+    jasperreports {
+      verbose = true
+    }
+
+    compileAllReports.dependsOn compileGroovy
+
+#### Adding Project Compiled Sources
+
+Use the `classpath` property to acces your compiled sources in you JasperReports designs. Configure your build script in a similar way:
+
+    jasperreports {
+        verbose = true
+        classpath = project.sourceSets.main.output
+    }
+
 ## Getting Help
 
 To ask questions or report bugs, please use the [Github project](https://github.com/gmazelier/gradle/jasperreports/issues).
