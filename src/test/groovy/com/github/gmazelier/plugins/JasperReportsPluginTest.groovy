@@ -49,7 +49,7 @@ class JasperReportsPluginTest extends GroovyTestCase {
         assert !jasperreports.keepJava
         assert jasperreports.validateXml
         assert !jasperreports.verbose
-        assert !jasperreports.usePackageDir
+        assert !jasperreports.useRelativeOutDir
     }
 
 }

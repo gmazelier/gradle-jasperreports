@@ -14,7 +14,7 @@ class JasperReportsExtension {
     boolean keepJava = false
     boolean validateXml = true
     boolean verbose = false
-    boolean usePackageDir = false
+    boolean useRelativeOutDir = false
 
     private Project project
 

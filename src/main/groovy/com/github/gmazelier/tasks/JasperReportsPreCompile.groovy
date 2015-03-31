@@ -20,7 +20,7 @@ class JasperReportsPreCompile extends DefaultTask {
     def boolean keepJava
     def boolean validateXml
     def boolean verbose
-    def boolean usePackageDir
+    def boolean useRelativeOutDir
 
     @TaskAction
     void prepareCompilation() {
@@ -83,7 +83,7 @@ class JasperReportsPreCompile extends DefaultTask {
             lifecycle "Compiler: ${compiler}"
             lifecycle "Keep Java files: ${keepJava}"
             lifecycle "Validate XML before compiling: ${validateXml}"
-            lifecycle "Use Java package dir: ${usePackageDir}"
+            lifecycle "Use relativ outDir: ${useRelativeOutDir}"
             lifecycle "<<<"
         }
     }

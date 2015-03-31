@@ -21,7 +21,7 @@ class JasperReportsCompile extends DefaultTask {
     @Input
     def String outExt
     def boolean verbose
-    def boolean usePackageDir
+    def boolean useRelativeOutDir
     def log = getLogger()
 
     @TaskAction
@@ -80,7 +80,7 @@ class JasperReportsCompile extends DefaultTask {
 
     def File outputFile(File src) {
 
-        if (usePackageDir) {
+        if (useRelativeOutDir) {
             def srcPackagePath = src.absolutePath.replaceAll(srcDir.absolutePath, "")
             def outDirPath = outDir.absolutePath + srcPackagePath.replaceAll(src.name, "")
             outDir = new File(outDirPath)
@@ -90,21 +90,8 @@ class JasperReportsCompile extends DefaultTask {
             }
         }
 
-        /*def repla = src.absolutePath.replaceAll(srcDir.absolutePath, "")
-        println "replaced: ${repla}"
-        def dirPath = outDir.absolutePath + repla.replaceAll(src.name, "")
-        println "save to dir: ${dirPath}"
-        def tmpOutJasperDir = new File(dirPath)
-        if (tmpOutJasperDir.isDirectory()) {
-            println 'Directory already exsits'
-        } else {
-            tmpOutJasperDir.mkdirs()
-        }
-        */
-
-        //new File(tmpOutJasperDir, src.name.replaceAll(srcExt, outExt))
         new File(outDir, src.name.replaceAll(srcExt, outExt))
-        //new File(outDir, repla.replaceAll(srcExt, outExt))
+
     }
 
     def failureMessage = { List failures ->
