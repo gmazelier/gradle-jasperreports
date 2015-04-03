@@ -157,6 +157,12 @@ Use the `classpath` property to acces your compiled sources in you JasperReports
 
 To ask questions or report bugs, please use the [Github project](https://github.com/gmazelier/gradle/jasperreports/issues).
 
+## Contributors
+
+Patches are welcome. Thanks to:
+
+* [Rankec](https://github.com/rankec)
+
 ## License
 This plugin is licensed under [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 without warranties or conditions of any kind, either express or implied.
