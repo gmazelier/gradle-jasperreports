@@ -163,6 +163,21 @@ Patches are welcome. Thanks to:
 
 * [Rankec](https://github.com/rankec)
 
+## Change Log
+
+### 0.2.1 (2015-04-03)
+
+* Adds `useRelativeOutDir` option.
+* Enable Gradle wrapper for developers.
+
+### 0.2.0 (2015-02-26)
+
+* Adds `classpath` option.
+
+### 0.1.0 (2014-08-24)
+
+* Initial release.
+
 ## License
 This plugin is licensed under [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 without warranties or conditions of any kind, either express or implied.
