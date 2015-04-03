@@ -37,6 +37,7 @@ class JasperReportsPlugin implements Plugin<Project> {
 			preCompileTask.keepJava = extension.keepJava
 			preCompileTask.validateXml = extension.validateXml
 			preCompileTask.verbose = extension.verbose
+			preCompileTask.useRelativeOutDir = extension.useRelativeOutDir
 			// Compile task
 			compileTask.classpath = project.jasperreports.classpath
 			compileTask.srcDir = project.jasperreports.srcDir
@@ -44,6 +45,7 @@ class JasperReportsPlugin implements Plugin<Project> {
 			compileTask.srcExt = project.jasperreports.srcExt
 			compileTask.outExt = project.jasperreports.outExt
 			compileTask.verbose = project.jasperreports.verbose
+			compileTask.useRelativeOutDir = project.jasperreports.useRelativeOutDir
 		}
 	}
 

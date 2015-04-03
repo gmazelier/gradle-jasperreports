@@ -1,34 +1,36 @@
 package com.github.gmazelier.tasks
 
-import static groovyx.gpars.GParsPool.withPool
-
 import net.sf.jasperreports.engine.JasperCompileManager
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputDirectory
-import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.OutputDirectory
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.*
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
+
+import static groovyx.gpars.GParsPool.withPool
 
 class JasperReportsCompile extends DefaultTask {
 
-	@InputFiles Iterable<File> classpath
-	@InputDirectory def File srcDir
-	@OutputDirectory def File outDir
-	@Input def String srcExt
-	@Input def String outExt
+	@InputFiles
+	Iterable<File> classpath
+	@InputDirectory
+	def File srcDir
+	@OutputDirectory
+	def File outDir
+	@Input
+	def String srcExt
+	@Input
+	def String outExt
 	def boolean verbose
+	def boolean useRelativeOutDir
+	def log = getLogger()
 
 	@TaskAction
 	void execute(IncrementalTaskInputs inputs) {
-		def log = getLogger()
 
 		def dependencies = classpath.collect { dependency ->
 			dependency?.toURI()?.toURL()
 		}
-    if (verbose) log.lifecycle "Additional classpath: ${dependencies}"
+		if (verbose) log.lifecycle "Additional classpath: ${dependencies}"
 
 		def compilationTasks = []
 		inputs.outOfDate { change ->
@@ -51,7 +53,7 @@ class JasperReportsCompile extends DefaultTask {
 				def deps = task['deps']
 
 				if (verbose) log.lifecycle "Compiling file ${src.name}"
-				
+
 				try {
 					// Configure class loader with addtional dependencies
 					ClassLoader originalLoader = Thread.currentThread().getContextClassLoader()
@@ -77,7 +79,19 @@ class JasperReportsCompile extends DefaultTask {
 	}
 
 	def File outputFile(File src) {
+
+		if (useRelativeOutDir) {
+			def srcPackagePath = src.absolutePath.replaceAll(srcDir.absolutePath, "")
+			def outDirPath = outDir.absolutePath + srcPackagePath.replaceAll(src.name, "")
+			outDir = new File(outDirPath)
+			if (!outDir.isDirectory()) {
+				if (verbose) log.lifecycle "Create outDir: ${outDir.absolutePath}"
+				outDir.mkdirs()
+			}
+		}
+
 		new File(outDir, src.name.replaceAll(srcExt, outExt))
+
 	}
 
 	def failureMessage = { List failures ->

@@ -12,7 +12,7 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		assert project.tasks.prepareReportsCompilation instanceof JasperReportsPreCompile
-	}
+    }
 
 	public void testPluginAddsJasperReportsCompileTask() {
 		Project project = ProjectBuilder.builder().build()
@@ -41,14 +41,14 @@ class JasperReportsPluginTest extends GroovyTestCase {
 
 		def jasperreports = project.jasperreports as JasperReportsExtension
 		assert jasperreports.srcDir == new File('src/main/jasperreports')
-		assert jasperreports.tmpDir == new File("${project.buildDir }/jasperreports")
-		assert jasperreports.outDir == new File("${project.buildDir }/classes/main")
+		assert jasperreports.tmpDir == new File("${project.buildDir}/jasperreports")
+		assert jasperreports.outDir == new File("${project.buildDir}/classes/main")
 		assert jasperreports.srcExt == '.jrxml'
 		assert jasperreports.outExt == '.jasper'
 		assert jasperreports.compiler == 'net.sf.jasperreports.engine.design.JRJdtCompiler'
 		assert !jasperreports.keepJava
 		assert jasperreports.validateXml
 		assert !jasperreports.verbose
+		assert !jasperreports.useRelativeOutDir
 	}
-
 }

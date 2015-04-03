@@ -1,12 +1,13 @@
 package com.github.gmazelier.tasks
-import static net.sf.jasperreports.engine.design.JRCompiler.*
-import static net.sf.jasperreports.engine.xml.JRReportSaxParserFactory.COMPILER_XML_VALIDATION
 
 import net.sf.jasperreports.engine.DefaultJasperReportsContext
 import net.sf.jasperreports.engine.JasperReportsContext
 import org.gradle.api.DefaultTask
 import org.gradle.api.InvalidUserDataException
 import org.gradle.api.tasks.TaskAction
+
+import static net.sf.jasperreports.engine.design.JRCompiler.*
+import static net.sf.jasperreports.engine.xml.JRReportSaxParserFactory.COMPILER_XML_VALIDATION
 
 class JasperReportsPreCompile extends DefaultTask {
 
@@ -19,6 +20,7 @@ class JasperReportsPreCompile extends DefaultTask {
 	def boolean keepJava
 	def boolean validateXml
 	def boolean verbose
+	def boolean useRelativeOutDir
 
 	@TaskAction
 	void prepareCompilation() {
@@ -28,10 +30,10 @@ class JasperReportsPreCompile extends DefaultTask {
 	}
 
 	void checkDirectories() {
-		def Map<File,String> directoryErrors = [
-				(srcDir): false,
-				(tmpDir): true,
-				(outDir): true,
+		def Map<File, String> directoryErrors = [
+			(srcDir): false,
+			(tmpDir): true,
+			(outDir): true,
 		].collect { directory, isOutputDirectory ->
 			checkDirectory directory, isOutputDirectory
 		}.collectEntries().findAll { it.value }
@@ -81,8 +83,8 @@ class JasperReportsPreCompile extends DefaultTask {
 			lifecycle "Compiler: ${compiler}"
 			lifecycle "Keep Java files: ${keepJava}"
 			lifecycle "Validate XML before compiling: ${validateXml}"
+			lifecycle "Use relativ outDir: ${useRelativeOutDir}"
 			lifecycle "<<<"
 		}
 	}
-
 }
