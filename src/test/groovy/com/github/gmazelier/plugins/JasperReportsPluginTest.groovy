@@ -53,6 +53,26 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert !jasperreports.useRelativeOutDir
 	}
 
+	public void testPluginSpreadsExtOptions() {
+		String src = '.xml'
+		String out = '.class'
+		Project project = ProjectBuilder.builder().build()
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.jasperreports {
+			srcExt = src
+			outExt = out
+		}
+		project.evaluate()
+
+		assert src == project.jasperreports.srcExt
+		assert src == project.tasks.prepareReportsCompilation.srcExt
+		assert src == project.tasks.compileAllReports.srcExt
+
+		assert out == project.jasperreports.outExt
+		assert out == project.tasks.prepareReportsCompilation.outExt
+		assert out == project.tasks.compileAllReports.outExt
+	}
+
 	public void testPluginSpreadsCompilerOption() {
 		String groovyCompiler = 'net.sf.jasperreports.compilers.JRGroovyCompiler'
 		Project project = ProjectBuilder.builder().build()
