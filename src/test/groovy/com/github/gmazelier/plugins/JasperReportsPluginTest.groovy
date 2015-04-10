@@ -89,4 +89,17 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert project.tasks.prepareReportsCompilation.verbose
 		assert project.tasks.compileAllReports.verbose
 	}
+
+	public void testPluginSpreadsUseRelativeOutDirOption() {
+		Project project = ProjectBuilder.builder().build()
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.jasperreports {
+			useRelativeOutDir = true
+		}
+		project.evaluate()
+
+		assert project.jasperreports.useRelativeOutDir
+		assert project.tasks.prepareReportsCompilation.useRelativeOutDir
+		assert project.tasks.compileAllReports.useRelativeOutDir
+	}
 }
