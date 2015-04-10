@@ -98,6 +98,19 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert out == project.tasks.compileAllReports.outExt
 	}
 
+	public void testPluginSpreadsClasspathOption() {
+		Project project = ProjectBuilder.builder().build()
+		project.apply plugin: 'groovy'
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.jasperreports {
+			classpath = project.sourceSets.main.output
+		}
+		project.evaluate()
+
+		assert project.sourceSets.main.output == project.jasperreports.classpath
+		assert project.sourceSets.main.output == project.tasks.compileAllReports.classpath
+	}
+
 	public void testPluginSpreadsCompilerOption() {
 		String groovyCompiler = 'net.sf.jasperreports.compilers.JRGroovyCompiler'
 		Project project = ProjectBuilder.builder().build()
