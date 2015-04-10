@@ -76,4 +76,17 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert !project.jasperreports.validateXml
 		assert !project.tasks.prepareReportsCompilation.validateXml
 	}
+
+	public void testPluginSpreadsVerboseOption() {
+		Project project = ProjectBuilder.builder().build()
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.jasperreports {
+			verbose = true
+		}
+		project.evaluate()
+
+		assert project.jasperreports.verbose
+		assert project.tasks.prepareReportsCompilation.verbose
+		assert project.tasks.compileAllReports.verbose
+	}
 }
