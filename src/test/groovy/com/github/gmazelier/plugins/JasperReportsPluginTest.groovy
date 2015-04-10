@@ -40,6 +40,7 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		def jasperreports = project.jasperreports as JasperReportsExtension
+		assert jasperreports.classpath == []
 		assert jasperreports.srcDir == new File('src/main/jasperreports')
 		assert jasperreports.tmpDir == new File("${project.buildDir}/jasperreports")
 		assert jasperreports.outDir == new File("${project.buildDir}/classes/main")
