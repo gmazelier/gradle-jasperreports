@@ -11,16 +11,16 @@ import static net.sf.jasperreports.engine.xml.JRReportSaxParserFactory.COMPILER_
 
 class JasperReportsPreCompile extends DefaultTask {
 
-	def File srcDir
-	def File tmpDir
-	def File outDir
-	def String srcExt
-	def String outExt
-	def String compiler
-	def boolean keepJava
-	def boolean validateXml
-	def boolean verbose
-	def boolean useRelativeOutDir
+	File srcDir
+	File tmpDir
+	File outDir
+	String srcExt
+	String outExt
+	String compiler
+	boolean keepJava
+	boolean validateXml
+	boolean verbose
+	boolean useRelativeOutDir
 
 	@TaskAction
 	void prepareCompilation() {
@@ -30,7 +30,7 @@ class JasperReportsPreCompile extends DefaultTask {
 	}
 
 	void checkDirectories() {
-		def Map<File, String> directoryErrors = [
+		Map<File, String> directoryErrors = [
 			(srcDir): false,
 			(tmpDir): true,
 			(outDir): true,
