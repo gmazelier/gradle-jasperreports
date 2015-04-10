@@ -52,4 +52,16 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert !jasperreports.verbose
 		assert !jasperreports.useRelativeOutDir
 	}
+
+	public void testPluginSpreadsKeepJavaOption() {
+		Project project = ProjectBuilder.builder().build()
+		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.jasperreports {
+			keepJava = true
+		}
+		project.evaluate()
+
+		assert project.jasperreports.keepJava
+		assert project.tasks.prepareReportsCompilation.keepJava
+	}
 }
