@@ -19,6 +19,9 @@ apply plugin: 'com.jfrog.bintray'
 repositories {
 	mavenCentral()
 	maven {
+		url 'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
+	}
+	maven {
 		url 'http://jasperreports.sourceforge.net/maven2'
 	}
 	maven {
@@ -33,7 +36,7 @@ task wrapper(type: Wrapper) {
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
-	compile 'net.sf.jasperreports:jasperreports:5.2.0'
+	compile 'net.sf.jasperreports:jasperreports:6.2.0'
 	compile 'org.codehaus.gpars:gpars:1.2.1'
 }
 
