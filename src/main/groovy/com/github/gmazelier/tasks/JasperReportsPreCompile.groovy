@@ -61,7 +61,7 @@ class JasperReportsPreCompile extends DefaultTask {
 
 		// If is an output directory and does not exist, create it
 		if (isOutputDirectory && !directory.exists() && !directory.mkdirs())
-			return [directory, "${directory} cannot be create!"]
+			return [directory, "${directory} cannot be created!"]
 
 		// If is an output directory, it must be writable
 		if (isOutputDirectory && !directory.canWrite())
@@ -83,7 +83,7 @@ class JasperReportsPreCompile extends DefaultTask {
 			lifecycle "Compiler: ${compiler}"
 			lifecycle "Keep Java files: ${keepJava}"
 			lifecycle "Validate XML before compiling: ${validateXml}"
-			lifecycle "Use relativ outDir: ${useRelativeOutDir}"
+			lifecycle "Use relative outDir: ${useRelativeOutDir}"
 			lifecycle "<<<"
 		}
 	}
