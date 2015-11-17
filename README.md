@@ -34,7 +34,7 @@ To clean up and start fresh, simply run:
 To use in Gradle 2.1 and later...
 
     plugins {
-        id 'com.github.gmazelier.jasperreports' version '0.2.1'
+        id 'com.github.gmazelier.jasperreports' version '0.3.0'
     }
 
 To use in earlier versions...
@@ -50,7 +50,7 @@ To use in earlier versions...
             }
         }
         dependencies {
-            classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.2.1'
+            classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.3.0'
         }
     }
 
@@ -124,7 +124,7 @@ Here's a way to share dependencies (`joda-time` in this example) between the mai
         }
       }
       dependencies {
-        classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.2.1'
+        classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.3.0'
         classpath libs.jrdeps
       }
     }
