@@ -168,6 +168,12 @@ Patches are welcome. Thanks to:
 
 ## Change Log
 
+### 0.3.0 (2015-11-17)
+
+* Adds Java 8 support.
+* Configures Travis CI.
+* Improves tests.
+
 ### 0.2.1 (2015-04-03)
 
 * Adds `useRelativeOutDir` option.
