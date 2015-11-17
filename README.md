@@ -163,6 +163,7 @@ To ask questions or report bugs, please use the [Github project](https://github.
 
 Patches are welcome. Thanks to:
 
+* [Blake Jackson](https://github.com/blaketastic2)
 * [Rankec](https://github.com/rankec)
 
 ## Change Log
