@@ -80,17 +80,21 @@ class JasperReportsCompile extends DefaultTask {
 
 	def File outputFile(File src) {
 
+		// local variable so we aren't continuously appending to the outDir
+		def useOutDir = outDir
+
 		if (useRelativeOutDir) {
+
 			def srcPackagePath = src.absolutePath.replaceAll(srcDir.absolutePath, "")
-			def outDirPath = outDir.absolutePath + srcPackagePath.replaceAll(src.name, "")
-			outDir = new File(outDirPath)
-			if (!outDir.isDirectory()) {
-				if (verbose) log.lifecycle "Create outDir: ${outDir.absolutePath}"
-				outDir.mkdirs()
+			def outDirPath = useOutDir.absolutePath + srcPackagePath.replaceAll(src.name, "")
+			useOutDir = new File(outDirPath)
+			if (!useOutDir.isDirectory()) {
+				if (verbose) log.lifecycle "Create outDir: ${useOutDir.absolutePath}"
+				useOutDir.mkdirs()
 			}
 		}
 
-		new File(outDir, src.name.replaceAll(srcExt, outExt))
+		new File(useOutDir, src.name.replaceAll(srcExt, outExt))
 
 	}
 
