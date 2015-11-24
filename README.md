@@ -174,6 +174,10 @@ Patches are welcome. Thanks to:
 
 ## Change Log
 
+### 0.3.1 (2015-11-24)
+
+* Fix an issue if there are multiple files in subdirectories when using `useRelativeOutDir`.
+
 ### 0.3.0 (2015-11-17)
 
 * Adds Java 8 support.
