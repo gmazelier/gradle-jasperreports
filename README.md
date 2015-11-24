@@ -43,6 +43,9 @@ To use in earlier versions...
         repositories {
             jcenter()
             maven {
+                url 'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
+            }
+            maven {
                 url 'http://jasperreports.sourceforge.net/maven2'
             }
             maven {
@@ -116,6 +119,9 @@ Here's a way to share dependencies (`joda-time` in this example) between the mai
       repositories {
         jcenter()
         mavenCentral()
+        maven {
+            url 'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
+        }
         maven {
           url 'http://jasperreports.sourceforge.net/maven2'
         }
