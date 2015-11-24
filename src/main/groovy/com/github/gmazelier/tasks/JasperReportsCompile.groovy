@@ -1,5 +1,6 @@
 package com.github.gmazelier.tasks
 
+import groovy.json.StringEscapeUtils
 import net.sf.jasperreports.engine.JasperCompileManager
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
@@ -85,7 +86,8 @@ class JasperReportsCompile extends DefaultTask {
 
 		if (useRelativeOutDir) {
 
-			def srcPackagePath = src.absolutePath.replaceAll(srcDir.absolutePath, "")
+			def escaped = StringEscapeUtils.escapeJava(srcDir.absolutePath)
+			def srcPackagePath = src.absolutePath.replaceAll(escaped, "")
 			def outDirPath = useOutDir.absolutePath + srcPackagePath.replaceAll(src.name, "")
 			useOutDir = new File(outDirPath)
 			if (!useOutDir.isDirectory()) {
