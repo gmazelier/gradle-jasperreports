@@ -34,7 +34,7 @@ To clean up and start fresh, simply run:
 To use in Gradle 2.1 and later...
 
     plugins {
-        id 'com.github.gmazelier.jasperreports' version '0.3.0'
+        id 'com.github.gmazelier.jasperreports' version '0.3.1'
     }
 
 To use in earlier versions...
@@ -43,6 +43,9 @@ To use in earlier versions...
         repositories {
             jcenter()
             maven {
+                url 'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
+            }
+            maven {
                 url 'http://jasperreports.sourceforge.net/maven2'
             }
             maven {
@@ -50,7 +53,7 @@ To use in earlier versions...
             }
         }
         dependencies {
-            classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.3.0'
+            classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.3.1'
         }
     }
 
@@ -117,6 +120,9 @@ Here's a way to share dependencies (`joda-time` in this example) between the mai
         jcenter()
         mavenCentral()
         maven {
+            url 'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
+        }
+        maven {
           url 'http://jasperreports.sourceforge.net/maven2'
         }
         maven {
@@ -124,7 +130,7 @@ Here's a way to share dependencies (`joda-time` in this example) between the mai
         }
       }
       dependencies {
-        classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.3.0'
+        classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.3.1'
         classpath libs.jrdeps
       }
     }
@@ -167,6 +173,10 @@ Patches are welcome. Thanks to:
 * [Rankec](https://github.com/rankec)
 
 ## Change Log
+
+### 0.3.1 (2015-11-24)
+
+* Fix an issue if there are multiple files in subdirectories when using `useRelativeOutDir`.
 
 ### 0.3.0 (2015-11-17)
 
