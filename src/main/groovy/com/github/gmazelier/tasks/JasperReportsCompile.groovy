@@ -89,10 +89,7 @@ class JasperReportsCompile extends DefaultTask {
 		if (useRelativeOutDir) {
 
 			Path srcPath = src.toPath()
-			log.lifecycle "srcPath: ${srcPath}"
 			Path srcDirPath = srcDir.getAbsoluteFile().toPath()
-			log.lifecycle "srcDirPath: ${srcDirPath}"
-
 			Path relativePath = srcDirPath.relativize(srcPath)
 			def parent = relativePath.parent != null ? relativePath.parent.toString() : ""
 			def path = Paths.get(useOutDir.absolutePath, parent)
