@@ -6,6 +6,9 @@ import org.gradle.api.GradleException
 import org.gradle.api.tasks.*
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
 
+import java.nio.file.Path
+import java.nio.file.Paths
+
 import static groovyx.gpars.GParsPool.withPool
 
 class JasperReportsCompile extends DefaultTask {
@@ -85,9 +88,13 @@ class JasperReportsCompile extends DefaultTask {
 
 		if (useRelativeOutDir) {
 
-			def srcPackagePath = src.absolutePath.replaceAll(srcDir.absolutePath, "")
-			def outDirPath = useOutDir.absolutePath + srcPackagePath.replaceAll(src.name, "")
-			useOutDir = new File(outDirPath)
+			Path srcPath = src.toPath()
+			Path srcDirPath = srcDir.getAbsoluteFile().toPath()
+			Path relativePath = srcDirPath.relativize(srcPath)
+			def parent = relativePath.parent != null ? relativePath.parent.toString() : ""
+			def path = Paths.get(useOutDir.absolutePath, parent)
+
+			useOutDir = path.toFile()
 			if (!useOutDir.isDirectory()) {
 				if (verbose) log.lifecycle "Create outDir: ${useOutDir.absolutePath}"
 				useOutDir.mkdirs()
