@@ -174,6 +174,10 @@ Patches are welcome. Thanks to:
 
 ## Change Log
 
+### 0.3.2 (2015-12-07)
+
+* Adds Microsoft OS support.
+
 ### 0.3.1 (2015-11-24)
 
 * Fix an issue if there are multiple files in subdirectories when using `useRelativeOutDir`.
