@@ -83,8 +83,8 @@ Below is a complete example, with default values:
 
     jasperreports {
         srcDir = file('src/main/jasperreports')
-        tmpDir = file('${project.buildDir}/jasperreports')
-        outDir = file('${project.buildDir}/classes/main')
+        tmpDir = file("${project.buildDir}/jasperreports")
+        outDir = file("${project.buildDir}/classes/main")
         srcExt = '.jrxml'
         outExt = '.jasper'
         compiler = 'net.sf.jasperreports.engine.design.JRJdtCompiler'
