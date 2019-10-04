@@ -23,8 +23,11 @@ class JasperReportsCompile extends DefaultTask {
 	def String srcExt
 	@Input
 	def String outExt
+	@Input
 	def boolean verbose
+	@Input
 	def boolean useRelativeOutDir
+	@Console
 	def log = getLogger()
 
 	@TaskAction
@@ -105,6 +108,7 @@ class JasperReportsCompile extends DefaultTask {
 
 	}
 
+	@Console
 	def failureMessage = { List failures ->
 		def stringBuilder = new StringBuilder()
 		stringBuilder.append "Could not compile ${failures.size()} designs:\n"
