@@ -4,6 +4,10 @@ import net.sf.jasperreports.engine.DefaultJasperReportsContext
 import net.sf.jasperreports.engine.JasperReportsContext
 import org.gradle.api.DefaultTask
 import org.gradle.api.InvalidUserDataException
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.Internal
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
 import static net.sf.jasperreports.engine.design.JRCompiler.*
@@ -11,15 +15,25 @@ import static net.sf.jasperreports.engine.xml.JRReportSaxParserFactory.COMPILER_
 
 class JasperReportsPreCompile extends DefaultTask {
 
+	@InputDirectory
 	File srcDir
+	@OutputDirectory
 	File tmpDir
+	@OutputDirectory
 	File outDir
+	@Input
 	String srcExt
+	@Input
 	String outExt
+	@Input
 	String compiler
+	@Input
 	boolean keepJava
+	@Input
 	boolean validateXml
+	@Input
 	boolean verbose
+	@Input
 	boolean useRelativeOutDir
 
 	@TaskAction
@@ -54,6 +68,7 @@ class JasperReportsPreCompile extends DefaultTask {
 		context.setProperty COMPILER_TEMP_DIR, tmpDir.canonicalPath
 	}
 
+	@Internal
 	def checkDirectory = { directory, isOutputDirectory ->
 		// If exists, it must be a directory
 		if (directory?.exists() && !directory.isDirectory())
