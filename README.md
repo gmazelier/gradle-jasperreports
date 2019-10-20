@@ -171,6 +171,7 @@ Patches are welcome. Thanks to:
 
 * [Blake Jackson](https://github.com/blaketastic2)
 * [Rankec](https://github.com/rankec)
+* [tkofford](https://github.com/tkofford)
 
 ## Change Log
 
