@@ -168,6 +168,11 @@ Patches are welcome. Thanks to:
 
 ## Change Log
 
+### 0.4.0 (2019-10-20)
+
+* Dependencies upgrade (Gradle and Jasper).
+* Move to Gradle publishing plugin.
+
 ### 0.3.2 (2015-12-07)
 
 * Adds Microsoft OS support.
