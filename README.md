@@ -20,9 +20,9 @@ If your designs compilation needs to run after Groovy compilation, running `comp
     :prepareReportsCompilation
     :compileAllReports
     21 designs compiled in 2222 ms
-    
+
     BUILD SUCCESSFUL
-    
+
     Total time: 6.577 secs
 
 To clean up and start fresh, simply run:
@@ -31,33 +31,26 @@ To clean up and start fresh, simply run:
 
 ### Installation
 
-To use in Gradle 2.1 and later...
+Using the pluging DSL...
 
     plugins {
-        id 'com.github.gmazelier.jasperreports' version '0.3.2'
+      id "com.github.gmazelier.jasperreports" version "0.4.0"
     }
 
-To use in earlier versions...
+Using the legacy plugin application...
 
     buildscript {
-        repositories {
-            jcenter()
-            maven {
-                url 'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
-            }
-            maven {
-                url 'http://jasperreports.sourceforge.net/maven2'
-            }
-            maven {
-                url 'http://repository.jboss.org/maven2/'
-            }
+      repositories {
+        maven {
+          url "https://plugins.gradle.org/m2/"
         }
-        dependencies {
-            classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.3.2'
-        }
+      }
+      dependencies {
+        classpath "com.github.gmazelier:jasperreports-gradle-plugin:0.4.0"
+      }
     }
 
-    apply plugin: 'com.github.gmazelier.jasperreports'
+    apply plugin: "com.github.gmazelier.jasperreports"
 
 ### Configuration
 
