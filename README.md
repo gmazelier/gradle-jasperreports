@@ -1,8 +1,7 @@
 # Gradle JasperReports Plugin
 
-Latest version: [![download latest version](https://api.bintray.com/packages/gmazelier/maven/com.github.gmazelier:jasperreports-gradle-plugin/images/download.png)](https://bintray.com/gmazelier/maven/com.github.gmazelier:jasperreports-gradle-plugin/_latestVersion)
-
-Build status: [![Build Status](https://travis-ci.org/gmazelier/gradle-jasperreports.svg)](https://travis-ci.org/gmazelier/gradle-jasperreports)
+[![Build Status](https://travis-ci.org/gmazelier/gradle-jasperreports.svg)](https://travis-ci.org/gmazelier/gradle-jasperreports)
+[![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/com/github/gmazelier/jasperreports-gradle-plugin/maven-metadata.xml.svg?colorB=007ec6&label=version)](https://plugins.gradle.org/plugin/com.github.gmazelier.jasperreports)
 
 ## Description
 
