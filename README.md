@@ -34,7 +34,7 @@ To clean up and start fresh, simply run:
 Using the pluging DSL...
 
     plugins {
-      id "com.github.gmazelier.jasperreports" version "0.4.0"
+      id "com.github.gmazelier.jasperreports" version "0.4"
     }
 
 Using the legacy plugin application...
@@ -46,7 +46,7 @@ Using the legacy plugin application...
         }
       }
       dependencies {
-        classpath "com.github.gmazelier:jasperreports-gradle-plugin:0.4.0"
+        classpath "com.github.gmazelier:jasperreports-gradle-plugin:0.4"
       }
     }
 
@@ -168,7 +168,7 @@ Patches are welcome. Thanks to:
 
 ## Change Log
 
-### 0.4.0 (2019-10-20)
+### 0.4 (2019-10-20)
 
 * Dependencies upgrade (Gradle and Jasper).
 * Move to Gradle publishing plugin.
