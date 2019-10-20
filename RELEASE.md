@@ -21,19 +21,6 @@ Optionally publish locally and use a test project (future release will include i
 
 ## Publishing
 
-Upload to Bintray:
+Referer to the the Gradle “Plugin Publishing” plugin [documentation](https://plugins.gradle.org/docs/publish-plugin) to configure Gradle (mainly API keys) and then simply use the following command:
 
-    gradle bintrayUpload -PbintrayUser=$bintrayUser -PbintrayKey=$bintrayKey
-
-Sign the version using the REST API:
-
-    curl --basic --user $bintrayUser:$bintrayKey \
-      https://api.bintray.com/gpg/gmazelier/maven/com.github.gmazelier:jasperreports-gradle-plugin/versions/$version \
-      -X POST -H 'X-GPG-PASSPHRASE: $gpgPrivateKey'
-
-Connect to [Bintray](https://bintray.com):
-
-* review package,
-* publish it,
-* include it in [`jcenter`](http://jcenter.bintray.com),
-* include it in [`gradle-plugins`](https://bintray.com/gradle/gradle-plugins).
+    gradle publishPlugins
