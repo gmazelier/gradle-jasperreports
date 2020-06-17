@@ -4,38 +4,42 @@ import com.github.gmazelier.tasks.JasperReportsCompile
 import com.github.gmazelier.tasks.JasperReportsPreCompile
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.jupiter.api.Test
 
-class JasperReportsPluginTest extends GroovyTestCase {
+class JasperReportsPluginTest {
 
-	public void testPluginAddsJasperReportsPreCompileTask() {
+	@Test
+	static void testPluginAddsJasperReportsPreCompileTask() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
-
 		assert project.tasks.prepareReportsCompilation instanceof JasperReportsPreCompile
     }
 
-	public void testPluginAddsJasperReportsCompileTask() {
+	@Test
+	static void testPluginAddsJasperReportsCompileTask() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		assert project.tasks.compileAllReports instanceof JasperReportsCompile
 	}
-
-	public void testCompileAllReportsDependsOnPrepareReportsCompilation() {
+	@Test
+	static void testCompileAllReportsDependsOnPrepareReportsCompilation() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		assert project.tasks.compileAllReports.dependsOn(project.tasks.prepareReportsCompilation)
 	}
 
-	public void testPluginAddsJasperReportsExtension() {
+	@Test
+	static void testPluginAddsJasperReportsExtension() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
 		assert project.jasperreports instanceof JasperReportsExtension
 	}
 
-	public void testPluginHasDefaultValues() {
+	@Test
+	static void testPluginHasDefaultValues() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 
@@ -53,7 +57,8 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert !jasperreports.useRelativeOutDir
 	}
 
-	public void testPluginSpreadsDirOptions() {
+	@Test
+	void testPluginSpreadsDirOptions() {
 		File src = new File('src/jasperreports')
 		File tmp = new File('tmp/jasperreports')
 		File out = new File('out/jasperreports')
@@ -78,7 +83,8 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert out == project.tasks.compileAllReports.outDir
 	}
 
-	public void testPluginSpreadsExtOptions() {
+	@Test
+	void testPluginSpreadsExtOptions() {
 		String src = '.xml'
 		String out = '.class'
 		Project project = ProjectBuilder.builder().build()
@@ -98,7 +104,8 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert out == project.tasks.compileAllReports.outExt
 	}
 
-	public void testPluginSpreadsClasspathOption() {
+	@Test
+	void testPluginSpreadsClasspathOption() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'groovy'
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
@@ -111,7 +118,8 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert project.sourceSets.main.output == project.tasks.compileAllReports.classpath
 	}
 
-	public void testPluginSpreadsCompilerOption() {
+	@Test
+	void testPluginSpreadsCompilerOption() {
 		String groovyCompiler = 'net.sf.jasperreports.compilers.JRGroovyCompiler'
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
@@ -124,7 +132,8 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert groovyCompiler == project.tasks.prepareReportsCompilation.compiler
 	}
 
-	public void testPluginSpreadsKeepJavaOption() {
+	@Test
+	void testPluginSpreadsKeepJavaOption() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 		project.jasperreports {
@@ -136,7 +145,8 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert project.tasks.prepareReportsCompilation.keepJava
 	}
 
-	public void testPluginSpreadsValidateXmlOption() {
+	@Test
+	void testPluginSpreadsValidateXmlOption() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 		project.jasperreports {
@@ -148,7 +158,8 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert !project.tasks.prepareReportsCompilation.validateXml
 	}
 
-	public void testPluginSpreadsVerboseOption() {
+	@Test
+	void testPluginSpreadsVerboseOption() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 		project.jasperreports {
@@ -161,7 +172,8 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		assert project.tasks.compileAllReports.verbose
 	}
 
-	public void testPluginSpreadsUseRelativeOutDirOption() {
+	@Test
+	void testPluginSpreadsUseRelativeOutDirOption() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'com.github.gmazelier.jasperreports'
 		project.jasperreports {
