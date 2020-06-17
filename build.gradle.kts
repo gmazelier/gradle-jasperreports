@@ -16,7 +16,7 @@ repositories {
 	jcenter()
 	mavenCentral()
 	maven {
-		url = URI("http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/")
+		url = URI("https://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/")
 	}
 }
 
