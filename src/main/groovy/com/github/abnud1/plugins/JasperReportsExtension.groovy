@@ -1,4 +1,4 @@
-package com.github.gmazelier.plugins
+package com.github.abnud1.plugins
 
 import org.gradle.api.Project
 

@@ -1,4 +1,4 @@
-package com.github.gmazelier.tasks
+package com.github.abnud1.tasks
 
 import net.sf.jasperreports.engine.DefaultJasperReportsContext
 import net.sf.jasperreports.engine.JasperReportsContext

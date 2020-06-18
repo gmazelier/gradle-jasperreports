@@ -1,9 +1,11 @@
-package com.github.gmazelier.plugins
+package com.github.abnud1.plugins
 
-import com.github.gmazelier.tasks.JasperReportsCompile
-import com.github.gmazelier.tasks.JasperReportsPreCompile
+import com.github.abnud1.tasks.JasperReportsCompile
+import com.github.abnud1.tasks.JasperReportsPreCompile
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
+import org.gradle.api.internal.file.ManagedFactories
 
 class JasperReportsPlugin implements Plugin<Project> {
 
@@ -25,7 +27,6 @@ class JasperReportsPlugin implements Plugin<Project> {
 				dependsOn: 'prepareReportsCompilation',
 				type: JasperReportsCompile
 		) as JasperReportsCompile
-
 		project.afterEvaluate {
 			// Precompile task
 			preCompileTask.srcDir = extension.srcDir
@@ -40,7 +41,7 @@ class JasperReportsPlugin implements Plugin<Project> {
 			preCompileTask.useRelativeOutDir = extension.useRelativeOutDir
 			// Compile task
 			compileTask.classpath = project.jasperreports.classpath
-			compileTask.srcDir = project.jasperreports.srcDir
+			compileTask.srcDirProperty.set(project.jasperreports.srcDir.absoluteFile)
 			compileTask.outDir = project.jasperreports.outDir
 			compileTask.srcExt = project.jasperreports.srcExt
 			compileTask.outExt = project.jasperreports.outExt
