@@ -9,21 +9,21 @@ plugins {
 
 // Unless overridden in the pluginBundle config DSL, the project version will
 // be used as your plugin version when publishing
-group = "com.github.gmazelier"
+group = "com.github.abnud1"
 version = project.property("version") as String
 
 repositories {
 	jcenter()
 	mavenCentral()
 	maven {
-		url = URI("https://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/")
+		url = URI("http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/")
 	}
 }
 
 dependencies {
-	implementation(gradleApi())
-	implementation(localGroovy())
-	implementation("net.sf.jasperreports:jasperreports:6.12.2")
+	compileOnly(gradleApi())
+	compileOnly(localGroovy())
+	compileOnly("net.sf.jasperreports:jasperreports:6.12.2")
 	testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
 }
@@ -32,16 +32,16 @@ dependencies {
 gradlePlugin {
 	plugins {
 		create("jasperreports"){
-			id = "com.github.gmazelier.jasperreports"
-			implementationClass = "com.github.gmazelier.plugins.JasperReportsPlugin"
+			id = "com.github.abnud1.jasperreports"
+			implementationClass = "com.github.abnud1.plugins.JasperReportsPlugin"
 		}
 	}
 }
 
 pluginBundle {
 	// These settings are set for the whole plugin bundle
-	website = "https://github.com/gmazelier/gradle-jasperreports"
-	vcsUrl = "https://github.com/gmazelier/gradle-jasperreports.git"
+	website = "https://github.com/abnud1/gradle-jasperreports"
+	vcsUrl = "https://github.com/abnud1/gradle-jasperreports.git"
 	description = "Provides the capability to compile JasperReports design files."
 	tags = listOf("gradle", "jasperreports")
 
@@ -83,6 +83,7 @@ tasks.withType(GroovyCompile::class){
 	sourceCompatibility = "1.8"
 	targetCompatibility = "1.8"
 }
+
 tasks.test{
 	useJUnitPlatform()
 }

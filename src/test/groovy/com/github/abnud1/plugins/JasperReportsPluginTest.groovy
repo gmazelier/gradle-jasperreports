@@ -1,31 +1,33 @@
-package com.github.gmazelier.plugins
+package com.github.abnud1.plugins
 
-import com.github.gmazelier.tasks.JasperReportsCompile
-import com.github.gmazelier.tasks.JasperReportsPreCompile
+import com.github.abnud1.tasks.JasperReportsCompile
+import com.github.abnud1.tasks.JasperReportsPreCompile
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.jupiter.api.Test
+
+import java.nio.file.Path
 
 class JasperReportsPluginTest {
 
 	@Test
 	static void testPluginAddsJasperReportsPreCompileTask() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 		assert project.tasks.prepareReportsCompilation instanceof JasperReportsPreCompile
     }
 
 	@Test
 	static void testPluginAddsJasperReportsCompileTask() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 
 		assert project.tasks.compileAllReports instanceof JasperReportsCompile
 	}
 	@Test
 	static void testCompileAllReportsDependsOnPrepareReportsCompilation() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 
 		assert project.tasks.compileAllReports.dependsOn(project.tasks.prepareReportsCompilation)
 	}
@@ -33,7 +35,7 @@ class JasperReportsPluginTest {
 	@Test
 	static void testPluginAddsJasperReportsExtension() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 
 		assert project.jasperreports instanceof JasperReportsExtension
 	}
@@ -41,7 +43,7 @@ class JasperReportsPluginTest {
 	@Test
 	static void testPluginHasDefaultValues() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 
 		def jasperreports = project.jasperreports as JasperReportsExtension
 		assert jasperreports.classpath == []
@@ -63,17 +65,17 @@ class JasperReportsPluginTest {
 		File tmp = new File('tmp/jasperreports')
 		File out = new File('out/jasperreports')
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 		project.jasperreports {
 			srcDir = src
 			tmpDir = tmp
 			outDir = out
 		}
 		project.evaluate()
-
+		File srcDir = project.tasks.compileAllReports.srcDirProperty.get().asFile
 		assert src == project.jasperreports.srcDir
 		assert src == project.tasks.prepareReportsCompilation.srcDir
-		assert src == project.tasks.compileAllReports.srcDir
+		assert src.absoluteFile == srcDir
 
 		assert tmp == project.jasperreports.tmpDir
 		assert tmp == project.tasks.prepareReportsCompilation.tmpDir
@@ -88,7 +90,7 @@ class JasperReportsPluginTest {
 		String src = '.xml'
 		String out = '.class'
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 		project.jasperreports {
 			srcExt = src
 			outExt = out
@@ -108,7 +110,7 @@ class JasperReportsPluginTest {
 	void testPluginSpreadsClasspathOption() {
 		Project project = ProjectBuilder.builder().build()
 		project.apply plugin: 'groovy'
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 		project.jasperreports {
 			classpath = project.sourceSets.main.output
 		}
@@ -122,7 +124,7 @@ class JasperReportsPluginTest {
 	void testPluginSpreadsCompilerOption() {
 		String groovyCompiler = 'net.sf.jasperreports.compilers.JRGroovyCompiler'
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 		project.jasperreports {
 			compiler = groovyCompiler
 		}
@@ -135,7 +137,7 @@ class JasperReportsPluginTest {
 	@Test
 	void testPluginSpreadsKeepJavaOption() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 		project.jasperreports {
 			keepJava = true
 		}
@@ -148,7 +150,7 @@ class JasperReportsPluginTest {
 	@Test
 	void testPluginSpreadsValidateXmlOption() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 		project.jasperreports {
 			validateXml = false
 		}
@@ -161,7 +163,7 @@ class JasperReportsPluginTest {
 	@Test
 	void testPluginSpreadsVerboseOption() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 		project.jasperreports {
 			verbose = true
 		}
@@ -175,7 +177,7 @@ class JasperReportsPluginTest {
 	@Test
 	void testPluginSpreadsUseRelativeOutDirOption() {
 		Project project = ProjectBuilder.builder().build()
-		project.apply plugin: 'com.github.gmazelier.jasperreports'
+		project.apply plugin: 'com.github.abnud1.jasperreports'
 		project.jasperreports {
 			useRelativeOutDir = true
 		}

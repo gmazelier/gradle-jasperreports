@@ -1,7 +1,7 @@
 # Gradle JasperReports Plugin
 
-[![Build Status](https://travis-ci.org/gmazelier/gradle-jasperreports.svg)](https://travis-ci.org/gmazelier/gradle-jasperreports)
-[![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/com/github/gmazelier/jasperreports-gradle-plugin/maven-metadata.xml.svg?colorB=007ec6&label=version)](https://plugins.gradle.org/plugin/com.github.gmazelier.jasperreports)
+[![Build Status](https://travis-ci.org/abnud1/gradle-jasperreports.svg)](https://travis-ci.org/abnud1/gradle-jasperreports)
+[![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/com/github/abnud1/jasperreports-gradle-plugin/maven-metadata.xml.svg?colorB=007ec6&label=version)](https://plugins.gradle.org/plugin/com.github.abnud1.jasperreports)
 
 ## Description
 
@@ -33,7 +33,7 @@ To clean up and start fresh, simply run:
 Using the pluging DSL...
 
     plugins {
-      id "com.github.gmazelier.jasperreports" version "0.4"
+      id "com.github.abnud1.jasperreports" version "0.4"
     }
 
 Using the legacy plugin application...
@@ -45,11 +45,11 @@ Using the legacy plugin application...
         }
       }
       dependencies {
-        classpath "com.github.gmazelier:jasperreports-gradle-plugin:0.4"
+        classpath "com.github.abnud1:jasperreports-gradle-plugin:0.4"
       }
     }
 
-    apply plugin: "com.github.gmazelier.jasperreports"
+    apply plugin: "com.github.abnud1.jasperreports"
 
 ### Configuration
 
@@ -122,13 +122,13 @@ Here's a way to share dependencies (`joda-time` in this example) between the mai
         }
       }
       dependencies {
-        classpath 'com.github.gmazelier:jasperreports-gradle-plugin:0.3.2'
+        classpath 'com.github.abnud1:jasperreports-gradle-plugin:0.3.2'
         classpath libs.jrdeps
       }
     }
 
     apply plugin: 'groovy'
-    apply plugin: 'com.github.gmazelier.jasperreports'
+    apply plugin: 'com.github.abnud1.jasperreports'
 
     repositories {
         mavenCentral()
@@ -155,7 +155,7 @@ Use the `classpath` property to acces your compiled sources in you JasperReports
 
 ## Getting Help
 
-To ask questions or report bugs, please use the [Github project](https://github.com/gmazelier/gradle/jasperreports/issues).
+To ask questions or report bugs, please use the [Github project](https://github.com/abnud1/gradle/jasperreports/issues).
 
 ## Contributors
 

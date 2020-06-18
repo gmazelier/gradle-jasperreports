@@ -1,10 +1,12 @@
-package com.github.gmazelier.tasks
+package com.github.abnud1.tasks
 
 import net.sf.jasperreports.engine.JasperCompileManager
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.*
 import org.gradle.work.ChangeType
+import org.gradle.work.Incremental
 import org.gradle.work.InputChanges
 
 import java.nio.file.Path
@@ -15,8 +17,9 @@ class JasperReportsCompile extends DefaultTask {
 
 	@InputFiles
 	Iterable<File> classpath
+	@Incremental
 	@InputDirectory
-	File srcDir
+	final DirectoryProperty srcDirProperty = project.objects.directoryProperty()
 	@OutputDirectory
 	File outDir
 	@Input
@@ -39,7 +42,7 @@ class JasperReportsCompile extends DefaultTask {
 		if (verbose) log.lifecycle "Additional classpath: ${dependencies}"
 
 		def compilationTasks = []
-		inputs.getFileChanges(getInputs().files).forEach{ change ->
+		inputs.getFileChanges(srcDirProperty).forEach{ change ->
 			if(change.changeType != ChangeType.REMOVED){
 				if (change.file.name.endsWith(srcExt))
 					compilationTasks << [src: change.file, out: outputFile(change.file), deps: dependencies]
@@ -91,7 +94,7 @@ class JasperReportsCompile extends DefaultTask {
 		if (useRelativeOutDir) {
 
 			Path srcPath = src.toPath()
-			Path srcDirPath = srcDir.getAbsoluteFile().toPath()
+			Path srcDirPath = srcDirProperty.get().asFile.getAbsoluteFile().toPath()
 			Path relativePath = srcDirPath.relativize(srcPath)
 			def parent = relativePath.parent != null ? relativePath.parent.toString() : ""
 			def path = Paths.get(useOutDir.absolutePath, parent)
