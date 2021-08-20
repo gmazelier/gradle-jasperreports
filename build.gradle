@@ -22,7 +22,8 @@ repositories {
 dependencies {
 	implementation gradleApi()
 	implementation localGroovy()
-	implementation 'net.sf.jasperreports:jasperreports:6.10.0'
+	implementation 'net.sf.jasperreports:jasperreports:6.17.0'
+	implementation 'com.lowagie:itext:2.1.7'
 	implementation 'org.codehaus.gpars:gpars:1.2.1'
 	testImplementation 'junit:junit:4.12'
 }
