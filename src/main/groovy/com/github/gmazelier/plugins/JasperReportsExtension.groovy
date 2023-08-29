@@ -5,7 +5,7 @@ import org.gradle.api.Project
 class JasperReportsExtension {
 
 	Iterable<File> classpath = []
-	File srcDir = new File('src/main/jasperreports')
+	File srcDir = new File("${project.projectDir}/src/main/jasperreports")
 	File tmpDir = new File("${project.buildDir}/jasperreports")
 	File outDir = new File("${project.buildDir}/classes/main")
 	String srcExt = '.jrxml'
@@ -21,5 +21,4 @@ class JasperReportsExtension {
 	JasperReportsExtension(Project project) {
 		this.project = project
 	}
-
 }

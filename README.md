@@ -167,6 +167,10 @@ Patches are welcome. Thanks to:
 
 ## Change Log
 
+### 0.5 (2023-08-29)
+
+* Add compatibility with gradle v8
+
 ### 0.4 (2019-10-20)
 
 * Dependencies upgrade (Gradle and Jasper).
