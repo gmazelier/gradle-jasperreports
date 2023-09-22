@@ -167,6 +167,10 @@ Patches are welcome. Thanks to:
 
 ## Change Log
 
+### 0.5.1 (2023-09-22)
+
+* Fix broken tests
+
 ### 0.5 (2023-08-29)
 
 * Add compatibility with gradle v8
