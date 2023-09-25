@@ -3,6 +3,7 @@ package com.github.gmazelier.plugins
 import com.github.gmazelier.tasks.JasperReportsCompile
 import com.github.gmazelier.tasks.JasperReportsPreCompile
 import org.gradle.api.Project
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.testfixtures.ProjectBuilder
 
 class JasperReportsPluginTest extends GroovyTestCase {
@@ -41,7 +42,7 @@ class JasperReportsPluginTest extends GroovyTestCase {
 
 		def jasperreports = project.jasperreports as JasperReportsExtension
 		assert jasperreports.classpath == []
-		assert jasperreports.srcDir == new File('src/main/jasperreports')
+		assert jasperreports.srcDir == new File("src/main/jasperreports")
 		assert jasperreports.tmpDir == new File("${project.buildDir}/jasperreports")
 		assert jasperreports.outDir == new File("${project.buildDir}/classes/main")
 		assert jasperreports.srcExt == '.jrxml'
@@ -67,8 +68,8 @@ class JasperReportsPluginTest extends GroovyTestCase {
 		project.evaluate()
 
 		assert src == project.jasperreports.srcDir
-		assert src == project.tasks.prepareReportsCompilation.srcDir
-		assert src == project.tasks.compileAllReports.srcDir
+		assert src.canonicalPath == project.tasks.prepareReportsCompilation.srcDir.dir('.').get().getAsFile().canonicalPath
+		assert src.canonicalPath == project.tasks.compileAllReports.srcDir.dir('.').get().getAsFile().canonicalPath
 
 		assert tmp == project.jasperreports.tmpDir
 		assert tmp == project.tasks.prepareReportsCompilation.tmpDir

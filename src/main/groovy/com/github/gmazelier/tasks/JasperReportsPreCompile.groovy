@@ -1,22 +1,26 @@
 package com.github.gmazelier.tasks
 
+import static net.sf.jasperreports.engine.design.JRCompiler.COMPILER_KEEP_JAVA_FILE
+import static net.sf.jasperreports.engine.design.JRCompiler.COMPILER_PREFIX
+import static net.sf.jasperreports.engine.design.JRCompiler.COMPILER_TEMP_DIR
+import static net.sf.jasperreports.engine.xml.JRReportSaxParserFactory.COMPILER_XML_VALIDATION
+
 import net.sf.jasperreports.engine.DefaultJasperReportsContext
 import net.sf.jasperreports.engine.JasperReportsContext
 import org.gradle.api.DefaultTask
 import org.gradle.api.InvalidUserDataException
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-
-import static net.sf.jasperreports.engine.design.JRCompiler.*
-import static net.sf.jasperreports.engine.xml.JRReportSaxParserFactory.COMPILER_XML_VALIDATION
+import org.gradle.work.Incremental
 
 class JasperReportsPreCompile extends DefaultTask {
-
+	@Incremental
 	@InputDirectory
-	File srcDir
+	final DirectoryProperty srcDir = project.objects.directoryProperty()//.convention(project.layout.projectDirectory.dir('src/main/jasper'))
 	@OutputDirectory
 	File tmpDir
 	@OutputDirectory
@@ -45,7 +49,7 @@ class JasperReportsPreCompile extends DefaultTask {
 
 	void checkDirectories() {
 		Map<File, String> directoryErrors = [
-			(srcDir): false,
+			(srcDir.getAsFile().get()): false,
 			(tmpDir): true,
 			(outDir): true,
 		].collect { directory, isOutputDirectory ->
@@ -90,7 +94,7 @@ class JasperReportsPreCompile extends DefaultTask {
 
 		getLogger().with {
 			lifecycle ">>> JasperReports Plugin Configuration"
-			lifecycle "Source directory: ${srcDir.canonicalPath}"
+			lifecycle "Source directory: ${srcDir.getAsFile().get().canonicalPath}"
 			lifecycle "Temporary directory: ${tmpDir.canonicalPath}"
 			lifecycle "Output directory: ${outDir.canonicalPath}"
 			lifecycle "Source files extension: ${srcExt}"
